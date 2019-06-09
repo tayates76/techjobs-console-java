@@ -10,6 +10,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.lang.*;
+
 
 /**
  * Created by LaunchCode
@@ -83,6 +85,62 @@ public class JobData {
 
         return jobs;
     }
+
+    /**
+     * Returns results of the search using the search term provided,
+     * and searching each field of the jobs data.
+     *
+     * For example, searching for employer "Enterprise" will include results
+     * with company "Enterprise Holdings, Inc" or location Enterprise, AL.
+     *
+     * @param value Value of teh field to search for
+     * @return List of all jobs matching the criteria
+     */
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // load data, if not already loaded
+        loadData();
+        Boolean isAdded = false;
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+//        for (HashMap<String, String> row : allJobs) {
+//
+//            for(String column : row.keySet()){
+//                String aValue = row.get(column);
+//                if(aValue.contains(value)){
+//                    if(!isAdded) {
+//                        jobs.add(row);
+//                        isAdded = true;
+//                    }
+//                }
+//            }
+//            isAdded = false;
+////            //(original***)String aValue = row.get(column);
+////
+////            if (aValue.contains(value)) {
+////                jobs.add(row);
+////            }
+//        }
+
+        for (HashMap<String, String> row : allJobs) {
+
+            for(String column : row.keySet()){
+                String aValue = row.get(column);
+                String aValueLower = aValue.toLowerCase();
+                String valueLower = value.toLowerCase();
+                if(aValueLower.contains(valueLower)){
+                    if(!isAdded) {
+                        jobs.add(row);
+                        isAdded = true;
+                    }
+                }
+            }
+            isAdded = false;
+        }
+
+        return jobs;
+    }
+
 
     /**
      * Read in data from a CSV file and store it in a list
