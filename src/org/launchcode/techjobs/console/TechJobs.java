@@ -113,14 +113,14 @@ public class TechJobs {
         if (someJobs.size()==0){
             System.out.println("Found 0 results");
         }else {
-            int i = 1;
+            //int i = 1;
             for(HashMap<String,String> eachJob : someJobs){
                 System.out.println("*****");
                 System.out.println("job no. " + i);
                 for(String header : eachJob.keySet()) {
                     System.out.println(eachJob.get(header));
                 }
-                i++;
+                //i++;
             }
             System.out.println("*****");
         }
